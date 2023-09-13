@@ -1,5 +1,6 @@
-import { useMemo } from "react";
-import { Constants, useMeeting } from "@videosdk.live/react-sdk";
+import { useMemo } from 'react';
+// external import
+import { Constants, useMeeting } from '@videosdk.live/react-sdk';
 
 const useIsRecording = () => {
   const { recordingState } = useMeeting();

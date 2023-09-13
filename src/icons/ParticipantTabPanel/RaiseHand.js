@@ -1,5 +1,7 @@
-import { SvgIcon } from "@material-ui/core";
+
 import React from "react";
+// external import
+import { SvgIcon } from "@material-ui/core";
 
 const RaiseHand = (props) => {
   return (

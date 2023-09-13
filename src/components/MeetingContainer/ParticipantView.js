@@ -1,9 +1,11 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { Grid, useTheme } from "@material-ui/core";
-import { useParticipant, useMeeting } from "@videosdk.live/react-sdk";
-import { nameTructed } from "../../utils/helper";
-import { MicOff } from "@material-ui/icons";
-import ReactPlayer from "react-player";
+import React, { useEffect, useMemo, useRef } from 'react';
+// external imports
+import { Grid, useTheme } from '@material-ui/core';
+import { MicOff } from '@material-ui/icons';
+import ReactPlayer from 'react-player';
+import { useParticipant, useMeeting } from '@videosdk.live/react-sdk';
+// internal import
+import { nameTructed } from '../../utils/helper';
 
 function ParticipantView({ participantId }) {
   const { displayName, webcamStream, micStream, webcamOn, micOn, isLocal } =
@@ -21,7 +23,7 @@ function ParticipantView({ participantId }) {
         micRef.current
           .play()
           .catch((error) =>
-            console.error("videoElem.current.play() failed", error)
+            console.error('videoElem.current.play() failed', error)
           );
       } else {
         micRef.current.srcObject = null;
@@ -40,29 +42,29 @@ function ParticipantView({ participantId }) {
       className={`h-full w-full  bg-gray-750 relative overflow-hidden rounded-lg video-cover`}
     >
       <div
-        className="absolute bottom-2 left-2 rounded-md flex items-center justify-center p-2"
+        className='absolute bottom-2 left-2 rounded-md flex items-center justify-center p-2'
         style={{
-          backgroundColor: "#00000066",
-          transition: "all 200ms",
-          transitionTimingFunction: "linear",
+          backgroundColor: '#00000066',
+          transition: 'all 200ms',
+          transitionTimingFunction: 'linear',
         }}
       >
         {!micOn ? (
-          <MicOff fontSize="small" style={{ color: "white" }}></MicOff>
+          <MicOff fontSize='small' style={{ color: 'white' }}></MicOff>
         ) : (
           <></>
         )}
-        <p className="text-sm text-white">
+        <p className='text-sm text-white'>
           {isPresenting
             ? isLocal
               ? `You are presenting`
               : `${nameTructed(displayName, 15)} is presenting`
             : isLocal
-            ? "You"
+            ? 'You'
             : nameTructed(displayName, 26)}
         </p>
       </div>
-      <audio ref={micRef} autoPlay muted={isLocal}/>
+      <audio ref={micRef} autoPlay muted={isLocal} />
       {webcamOn ? (
         <ReactPlayer
           //
@@ -77,19 +79,19 @@ function ParticipantView({ participantId }) {
           //
           url={webcamMediaStream}
           //
-          height={"100%"}
-          width={"100%"}
+          height={'100%'}
+          width={'100%'}
           // style={flipStyle}
           onError={(err) => {
-            console.log(err, "participant video error");
+            console.log(err, 'participant video error');
           }}
         />
       ) : (
-        <div className="h-full w-full flex items-center justify-center">
+        <div className='h-full w-full flex items-center justify-center'>
           <div
             className={`z-10 flex items-center justify-center rounded-full bg-gray-800 2xl:h-[92px] h-[52px] 2xl:w-[92px] w-[52px]`}
           >
-            <p className="text-2xl text-white">
+            <p className='text-2xl text-white'>
               {String(displayName).charAt(0).toUpperCase()}
             </p>
           </div>
@@ -106,9 +108,9 @@ export function ParticipantsViewer({ isPresenting, sideBarMode }) {
     ? [...mMeeting?.participants.keys()].slice(0, 6)
     : [...mMeeting?.participants.keys()];
 
-  const isXStoSM = theme.breakpoints.between("xs", "sm");
+  const isXStoSM = theme.breakpoints.between('xs', 'sm');
   const isMobile = window.matchMedia(
-    "only screen and (max-width: 768px)"
+    'only screen and (max-width: 768px)'
   ).matches;
 
   const perRow =
@@ -132,24 +134,24 @@ export function ParticipantsViewer({ isPresenting, sideBarMode }) {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: isXStoSM ? "column" : "row",
+        display: 'flex',
+        flexDirection: isXStoSM ? 'column' : 'row',
         flexGrow: 1,
         margin: 12,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
       className={`${
         participants.length < 2 && !sideBarMode && !isPresenting
-          ? "md:px-16 md:py-2"
+          ? 'md:px-16 md:py-2'
           : participants.length < 4 && !sideBarMode && !isPresenting
-          ? "md:px-16 md:py-10"
+          ? 'md:px-16 md:py-10'
           : participants.length > 4 && !sideBarMode && !isPresenting
-          ? "md:px-14"
-          : "md:px-0"
+          ? 'md:px-14'
+          : 'md:px-0'
       }`}
     >
-      <div className="flex flex-col w-full h-full">
+      <div className='flex flex-col w-full h-full'>
         {Array.from(
           { length: Math.ceil(participants.length / perRow) },
           (_, i) => {
@@ -159,9 +161,9 @@ export function ParticipantsViewer({ isPresenting, sideBarMode }) {
                 className={`flex flex-1 ${
                   isPresenting
                     ? participants.length === 1
-                      ? "justify-start items-start"
-                      : "items-center justify-center"
-                    : "items-center justify-center"
+                      ? 'justify-start items-start'
+                      : 'items-center justify-center'
+                    : 'items-center justify-center'
                 }`}
               >
                 {participants
@@ -174,15 +176,15 @@ export function ParticipantsViewer({ isPresenting, sideBarMode }) {
                         className={`flex flex-1 ${
                           isPresenting
                             ? participants.length === 1
-                              ? "md:h-34 md:w-32 xl:w-52 xl:h-48 "
+                              ? 'md:h-34 md:w-32 xl:w-52 xl:h-48 '
                               : participants.length === 2
-                              ? "md:w-36 xl:w-56"
-                              : "md:w-32 xl:w-48"
-                            : "w-full"
+                              ? 'md:w-36 xl:w-56'
+                              : 'md:w-32 xl:w-48'
+                            : 'w-full'
                         } items-center justify-center h-full ${
                           participants.length === 1
-                            ? "md:max-w-7xl 2xl:max-w-[1480px] "
-                            : "md:max-w-lg 2xl:max-w-2xl"
+                            ? 'md:max-w-7xl 2xl:max-w-[1480px] '
+                            : 'md:max-w-lg 2xl:max-w-2xl'
                         } overflow-clip overflow-hidden  p-1`}
                       >
                         <ParticipantView participantId={participantId} />

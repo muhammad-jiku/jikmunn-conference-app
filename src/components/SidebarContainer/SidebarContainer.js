@@ -1,3 +1,5 @@
+import React from 'react';
+// external imports
 import {
   Box,
   capitalize,
@@ -7,15 +9,15 @@ import {
   Fade,
   Dialog,
   Slide,
-} from "@material-ui/core";
-import { Close } from "@material-ui/icons";
-import { useMeeting } from "@videosdk.live/react-sdk";
-import React from "react";
-import useIsMobile from "../../utils/useIsMobile";
-import useIsTab from "../../utils/useIsTab";
-import useResponsiveSize from "../../utils/useResponsiveSize";
-import { ChatSidePanel } from "./ChatSidePanel";
-import { ParticipantSidePanel } from "./ParticipantSidePanel";
+} from '@material-ui/core';
+import { Close } from '@material-ui/icons';
+import { useMeeting } from '@videosdk.live/react-sdk';
+// internal imports
+import { ChatSidePanel } from './ChatSidePanel';
+import useIsTab from '../../utils/useIsTab';
+import useIsMobile from '../../utils/useIsMobile';
+import useResponsiveSize from '../../utils/useResponsiveSize';
+import { ParticipantSidePanel } from './ParticipantSidePanel';
 
 const SideBarTabView = ({
   height,
@@ -49,7 +51,7 @@ const SideBarTabView = ({
             backgroundColor: theme.palette.darkTheme.slightLighter,
             height: height,
             borderRadius: 10,
-            overflow: "hidden",
+            overflow: 'hidden',
           }}
         >
           <>
@@ -58,33 +60,33 @@ const SideBarTabView = ({
                 style={{
                   padding: panelHeaderPadding,
                   height: panelHeaderHeight - 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  borderBottom: "1px solid #70707033",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  borderBottom: '1px solid #70707033',
                 }}
               >
-                <Typography variant={"body1"} style={{ fontWeight: "bold" }}>
-                  {sideBarMode === "PARTICIPANTS"
+                <Typography variant={'body1'} style={{ fontWeight: 'bold' }}>
+                  {sideBarMode === 'PARTICIPANTS'
                     ? `${capitalize(
-                        String(sideBarMode || "").toLowerCase()
+                        String(sideBarMode || '').toLowerCase()
                       )} (${new Map(participants)?.size})`
-                    : capitalize(String(sideBarMode || "").toLowerCase())}
+                    : capitalize(String(sideBarMode || '').toLowerCase())}
                 </Typography>
                 <IconButton
                   onClick={handleClose}
                   style={{ margin: 0, padding: 0 }}
                 >
-                  <Close fontSize={"small"} />
+                  <Close fontSize={'small'} />
                 </IconButton>
               </Box>
             )}
-            {sideBarMode === "PARTICIPANTS" ? (
+            {sideBarMode === 'PARTICIPANTS' ? (
               <ParticipantSidePanel
                 panelHeight={panelHeight}
                 raisedHandsParticipants={raisedHandsParticipants}
               />
-            ) : sideBarMode === "CHAT" ? (
+            ) : sideBarMode === 'CHAT' ? (
               <ChatSidePanel panelHeight={panelHeight} />
             ) : null}
           </>
@@ -95,7 +97,7 @@ const SideBarTabView = ({
 };
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction='up' ref={ref} {...props} />;
 });
 export function SidebarConatiner({
   height,
@@ -148,8 +150,8 @@ export function SidebarConatiner({
         TransitionComponent={Transition}
       >
         <SideBarTabView
-          height={"100%"}
-          sideBarContainerWidth={"100%"}
+          height={'100%'}
+          sideBarContainerWidth={'100%'}
           panelHeight={height}
           sideBarMode={sideBarMode}
           raisedHandsParticipants={raisedHandsParticipants}

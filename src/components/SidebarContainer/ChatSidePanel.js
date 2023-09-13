@@ -1,14 +1,15 @@
+import React, { useEffect, useRef, useState } from 'react';
+// external imports
 import {
   IconButton,
   InputAdornment,
   OutlinedInput as Input,
   useTheme,
-} from "@material-ui/core";
-import { Send } from "@material-ui/icons";
-
-import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
-import React, { useEffect, useRef, useState } from "react";
-import { formatAMPM, json_verify, nameTructed } from "../../utils/helper";
+} from '@material-ui/core';
+import { Send } from '@material-ui/icons';
+import { useMeeting, usePubSub } from '@videosdk.live/react-sdk';
+// internal import
+import { formatAMPM, json_verify, nameTructed } from '../../utils/helper';
 
 const ChatMessage = ({ senderId, senderName, text, timestamp }) => {
   const mMeeting = useMeeting();
@@ -17,26 +18,26 @@ const ChatMessage = ({ senderId, senderName, text, timestamp }) => {
 
   return (
     <div
-      className={`flex ${localSender ? "justify-end" : "justify-start"} mt-4`}
+      className={`flex ${localSender ? 'justify-end' : 'justify-start'} mt-4`}
       style={{
-        maxWidth: "100%",
+        maxWidth: '100%',
       }}
     >
       <div
         className={`flex ${
-          localSender ? "items-end" : "items-start"
+          localSender ? 'items-end' : 'items-start'
         } flex-col py-1 px-2 rounded-md bg-gray-700`}
       >
-        <p style={{ color: "#ffffff80" }}>
-          {localSender ? "You" : nameTructed(senderName, 15)}
+        <p style={{ color: '#ffffff80' }}>
+          {localSender ? 'You' : nameTructed(senderName, 15)}
         </p>
         <div>
-          <p className="inline-block whitespace-pre-wrap break-words text-right text-white">
+          <p className='inline-block whitespace-pre-wrap break-words text-right text-white'>
             {text}
           </p>
         </div>
-        <div className="mt-1">
-          <p className="text-xs italic" style={{ color: "#ffffff80" }}>
+        <div className='mt-1'>
+          <p className='text-xs italic' style={{ color: '#ffffff80' }}>
             {formatAMPM(new Date(timestamp))}
           </p>
         </div>
@@ -46,8 +47,8 @@ const ChatMessage = ({ senderId, senderName, text, timestamp }) => {
 };
 
 const ChatInput = ({ inputHeight }) => {
-  const [message, setMessage] = useState("");
-  const { publish } = usePubSub("CHAT");
+  const [message, setMessage] = useState('');
+  const { publish } = usePubSub('CHAT');
   const input = useRef();
   const theme = useTheme();
 
@@ -55,9 +56,9 @@ const ChatInput = ({ inputHeight }) => {
     <div
       style={{
         height: inputHeight,
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
         paddingRight: theme.spacing(1),
         paddingLeft: theme.spacing(1),
       }}
@@ -65,43 +66,43 @@ const ChatInput = ({ inputHeight }) => {
       <Input
         style={{
           paddingRight: 0,
-          width: "100%",
+          width: '100%',
         }}
         rows={1}
         rowsMax={2}
         multiline
-        id="outlined"
+        id='outlined'
         onChange={(e) => {
           setMessage(e.target.value);
         }}
         ref={input}
         value={message}
-        placeholder="Write your message"
+        placeholder='Write your message'
         onKeyPress={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
+          if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             const messageText = message.trim();
 
             if (messageText.length > 0) {
               publish(messageText, { persist: true });
               setTimeout(() => {
-                setMessage("");
+                setMessage('');
               }, 100);
               input.current?.focus();
             }
           }
         }}
         endAdornment={
-          <InputAdornment position="end">
+          <InputAdornment position='end'>
             <IconButton
               disabled={message.length < 2}
-              variant="outlined"
+              variant='outlined'
               onClick={() => {
                 const messageText = message.trim();
                 if (messageText.length > 0) {
                   publish(messageText, { persist: true });
                   setTimeout(() => {
-                    setMessage("");
+                    setMessage('');
                   }, 100);
                   input.current?.focus();
                 }
@@ -118,7 +119,7 @@ const ChatInput = ({ inputHeight }) => {
 
 const ChatMessages = ({ listHeight }) => {
   const listRef = useRef();
-  const { messages } = usePubSub("CHAT");
+  const { messages } = usePubSub('CHAT');
 
   const scrollToBottom = (data) => {
     if (!data) {
@@ -130,7 +131,7 @@ const ChatMessages = ({ listHeight }) => {
 
       if (json_verify(text)) {
         const { type } = JSON.parse(text);
-        if (type === "CHAT") {
+        if (type === 'CHAT') {
           if (listRef.current) {
             listRef.current.scrollTop = listRef.current.scrollHeight;
           }
@@ -144,8 +145,8 @@ const ChatMessages = ({ listHeight }) => {
   }, [messages]);
 
   return messages ? (
-    <div ref={listRef} style={{ overflowY: "scroll", height: listHeight }}>
-      <div className="p-4">
+    <div ref={listRef} style={{ overflowY: 'scroll', height: listHeight }}>
+      <div className='p-4'>
         {messages.map((msg, i) => {
           const { senderId, senderName, message, timestamp } = msg;
           return (

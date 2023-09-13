@@ -1,22 +1,23 @@
+import { useEffect, useMemo, useRef } from 'react';
+// external imports
 import {
   Box,
   Button,
   Typography,
   useMediaQuery,
   useTheme,
-} from "@material-ui/core";
-import { MicOff, ScreenShare } from "@material-ui/icons";
-
-import { useMeeting, useParticipant } from "@videosdk.live/react-sdk";
-import { useEffect, useMemo, useRef } from "react";
-import ReactPlayer from "react-player";
-import { nameTructed } from "../../utils/helper";
+} from '@material-ui/core';
+import { MicOff, ScreenShare } from '@material-ui/icons';
+import ReactPlayer from 'react-player';
+import { useMeeting, useParticipant } from '@videosdk.live/react-sdk';
+// internal import
+import { nameTructed } from '../../utils/helper';
 
 export function PresenterView({ height }) {
   const mMeeting = useMeeting();
   const presenterId = mMeeting?.presenterId;
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.between("xs", "sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
 
   // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
 
@@ -59,7 +60,7 @@ export function PresenterView({ height }) {
           err.message ===
           "play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD"
         ) {
-          console.error("audio" + err.message);
+          console.error('audio' + err.message);
         }
       });
     } else {
@@ -72,24 +73,24 @@ export function PresenterView({ height }) {
       style={{
         height: height - theme.spacing(4),
         // width: "700px",
-        width: "100%",
+        width: '100%',
         backgroundColor: theme.palette.darkTheme.slightLighter,
-        position: "relative",
-        overflow: "hidden",
+        position: 'relative',
+        overflow: 'hidden',
         borderRadius: theme.spacing(1),
         margin: theme.spacing(1),
       }}
-      className={"video-cover"}
+      className={'video-cover'}
       // className="mt-1 h-full w-full relative flex items-center justify-center bg-gray-750 rounded-lg "
     >
       <audio autoPlay playsInline controls={false} ref={audioPlayer} />
       <div
         style={{
-          height: "100%",
-          width: "100%",
-          position: "relative",
+          height: '100%',
+          width: '100%',
+          position: 'relative',
         }}
-        className={"video-contain"}
+        className={'video-contain'}
       >
         <ReactPlayer
           ref={videoPlayer}
@@ -105,33 +106,33 @@ export function PresenterView({ height }) {
           //
           url={mediaStream}
           //
-          height={"100%"}
-          width={"100%"}
+          height={'100%'}
+          width={'100%'}
           style={{
-            filter: isLocal ? "blur(1rem)" : undefined,
+            filter: isLocal ? 'blur(1rem)' : undefined,
           }}
           onError={(err) => {
-            console.log(err, "presenter video error");
+            console.log(err, 'presenter video error');
           }}
         />
         <div
           style={{
-            position: "absolute",
+            position: 'absolute',
             bottom: theme.spacing(1),
             left: theme.spacing(1),
             backgroundColor: theme.palette.darkTheme.main,
             borderRadius: 6,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "all 200ms",
-            transitionTimingFunction: "linear",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 200ms',
+            transitionTimingFunction: 'linear',
             padding: theme.spacing(1),
           }}
         >
-          {!micOn ? <MicOff fontSize="small" color="primary"></MicOff> : <></>}
+          {!micOn ? <MicOff fontSize='small' color='primary'></MicOff> : <></>}
 
-          <Typography variant="subtitle2">
+          <Typography variant='subtitle2'>
             {isLocal
               ? `You are presenting`
               : `${nameTructed(displayName, 15)} is presenting`}
@@ -142,14 +143,14 @@ export function PresenterView({ height }) {
             p={5}
             style={{
               borderRadius: theme.spacing(2),
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%,-50%)',
               backgroundColor: theme.palette.darkTheme.slightLighter,
             }}
           >
@@ -162,9 +163,9 @@ export function PresenterView({ height }) {
             />
             <Box mt={2}>
               <Typography
-                variant="h6"
+                variant='h6'
                 style={{
-                  fontWeight: "bold",
+                  fontWeight: 'bold',
                   color: theme.palette.common.white,
                 }}
               >
@@ -173,8 +174,8 @@ export function PresenterView({ height }) {
             </Box>
             <Box mt={4}>
               <Button
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 onClick={(e) => {
                   e.stopPropagation();
                   mMeeting.toggleScreenShare();
@@ -198,23 +199,23 @@ export function PresenterView({ height }) {
     <div
       style={{
         height: height - theme.spacing(2),
-        width: "100%",
+        width: '100%',
         backgroundColor: theme.palette.darkTheme.slightLighter,
-        position: "relative",
+        position: 'relative',
         borderRadius: theme.spacing(1),
         margin: theme.spacing(1),
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
       // className={"video-cover"}
     >
       <audio autoPlay playsInline controls={false} ref={audioPlayer} />
       <div
         style={{
-          height: mobilePortrait ? "50%" : "100%",
-          width: "100%",
-          position: "relative",
+          height: mobilePortrait ? '50%' : '100%',
+          width: '100%',
+          position: 'relative',
         }}
         // className={"video-contain"}
       >
@@ -232,13 +233,13 @@ export function PresenterView({ height }) {
           //
           url={mediaStream}
           //
-          height={"100%"}
-          width={"100%"}
+          height={'100%'}
+          width={'100%'}
           style={{
-            filter: isLocal ? "blur(1rem)" : undefined,
+            filter: isLocal ? 'blur(1rem)' : undefined,
           }}
           onError={(err) => {
-            console.log(err, "presenter video error");
+            console.log(err, 'presenter video error');
           }}
         />
         {/* <video
@@ -254,22 +255,22 @@ export function PresenterView({ height }) {
         /> */}
         <div
           style={{
-            position: "absolute",
+            position: 'absolute',
             bottom: theme.spacing(1),
             left: theme.spacing(1),
-            backgroundColor: "#00000066",
+            backgroundColor: '#00000066',
             borderRadius: 6,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "all 200ms",
-            transitionTimingFunction: "linear",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 200ms',
+            transitionTimingFunction: 'linear',
             padding: theme.spacing(1),
           }}
         >
-          {!micOn ? <MicOff fontSize="small" color="primary"></MicOff> : <></>}
+          {!micOn ? <MicOff fontSize='small' color='primary'></MicOff> : <></>}
 
-          <Typography variant="subtitle2">
+          <Typography variant='subtitle2'>
             {isLocal
               ? `You are presenting`
               : `${nameTructed(displayName, 15)} is presenting`}
@@ -280,15 +281,15 @@ export function PresenterView({ height }) {
             p={5}
             style={{
               borderRadius: theme.spacing(2),
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
-              backgroundColor: "#333244",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%,-50%)',
+              backgroundColor: '#333244',
             }}
           >
             <ScreenShare
@@ -300,9 +301,9 @@ export function PresenterView({ height }) {
             />
             <Box mt={2}>
               <Typography
-                variant="h6"
+                variant='h6'
                 style={{
-                  fontWeight: "bold",
+                  fontWeight: 'bold',
                   color: theme.palette.common.white,
                 }}
               >
@@ -311,8 +312,8 @@ export function PresenterView({ height }) {
             </Box>
             <Box mt={4}>
               <Button
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 onClick={(e) => {
                   e.stopPropagation();
                   mMeeting.toggleScreenShare();

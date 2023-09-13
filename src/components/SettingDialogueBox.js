@@ -1,3 +1,5 @@
+import React, { useEffect, useRef, useState } from 'react';
+// external imports
 import {
   Box,
   Button,
@@ -12,12 +14,12 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import React, { useEffect, useRef, useState } from "react";
-import useResponsiveSize from "../utils/useResponsiveSize";
-import useWindowSize from "../utils/useWindowSize";
-import ConfirmBox from "./ConfirmBox";
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+// internal imports
+import ConfirmBox from './ConfirmBox';
+import useResponsiveSize from '../utils/useResponsiveSize';
+import useWindowSize from '../utils/useWindowSize';
 
 const AudioAnalyser = ({ audioTrack }) => {
   const theme = useTheme();
@@ -72,7 +74,7 @@ const AudioAnalyser = ({ audioTrack }) => {
       style={{
         width: 80,
         height: 100,
-        position: "relative",
+        position: 'relative',
       }}
     >
       {[
@@ -82,15 +84,15 @@ const AudioAnalyser = ({ audioTrack }) => {
           borderTopLeftRadius: 100,
           borderTopRightRadius: 100,
           top: 0,
-          alignItems: "flex-end",
+          alignItems: 'flex-end',
         },
         {
           borderBottomLeftRadius: 100,
           borderBottomRightRadius: 100,
           borderTopLeftRadius: 0,
           borderTopRightRadius: 0,
-          top: "50%",
-          alignItems: "flex-start",
+          top: '50%',
+          alignItems: 'flex-start',
         },
       ].map(
         (
@@ -107,11 +109,11 @@ const AudioAnalyser = ({ audioTrack }) => {
           <Box
             key={`audio_analyzer_i_${i}`}
             style={{
-              height: "50%",
-              display: "flex",
-              justifyContent: "space-evenly",
+              height: '50%',
+              display: 'flex',
+              justifyContent: 'space-evenly',
               alignItems,
-              position: "absolute",
+              position: 'absolute',
               top,
               left: 0,
               right: 0,
@@ -128,8 +130,8 @@ const AudioAnalyser = ({ audioTrack }) => {
                   backgroundColor: theme.palette.primary.main,
                   width: 80 / 12,
                   height: `${(volume / 256) * height}%`,
-                  transition: "all 50ms",
-                  transitionTimingFunction: "ease-in",
+                  transition: 'all 50ms',
+                  transitionTimingFunction: 'ease-in',
                 }}
               ></Box>
             ))}
@@ -142,22 +144,22 @@ const AudioAnalyser = ({ audioTrack }) => {
 
 const useStyles = makeStyles((theme) => ({
   selectIcon: {
-    color: "#404B53",
+    color: '#404B53',
   },
   paperDark: {
-    background: "#232830",
-    color: "#fff",
+    background: '#232830',
+    color: '#fff',
   },
   video: {
-    borderRadius: "6px",
-    backgroundColor: "#1c1c1c",
-    height: "100%",
-    width: "100%",
-    objectFit: "cover",
+    borderRadius: '6px',
+    backgroundColor: '#1c1c1c',
+    height: '100%',
+    width: '100%',
+    objectFit: 'cover',
   },
   buttonLight: {
-    "&:hover": {
-      backgroundColor: "#596BFF",
+    '&:hover': {
+      backgroundColor: '#596BFF',
     },
   },
 }));
@@ -180,9 +182,9 @@ export default function SettingDialogueBox({
   const theme = useTheme();
   const classes = useStyles();
 
-  const isXStoSM = useMediaQuery(theme.breakpoints.between("xs", "sm"));
-  const isXSOnly = useMediaQuery(theme.breakpoints.only("xs"));
-  const isSMONly = useMediaQuery(theme.breakpoints.only("sm"));
+  const isXStoSM = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isXSOnly = useMediaQuery(theme.breakpoints.only('xs'));
+  const isSMONly = useMediaQuery(theme.breakpoints.only('sm'));
   const [dlgDevices, setDlgDevices] = useState(false);
 
   const [boxHeight, setBoxHeight] = useState(0);
@@ -216,27 +218,27 @@ export default function SettingDialogueBox({
     <ThemeProvider theme={theme}>
       <Grid container>
         <Box>
-          <Dialog onClose={handleClose} open={open} maxWidth={"xl"}>
+          <Dialog onClose={handleClose} open={open} maxWidth={'xl'}>
             <Box
               p={internalPadding}
               style={{
-                width: isXSOnly ? "100vw" : isSMONly ? "50vw" : "55vw",
-                display: "flex",
+                width: isXSOnly ? '100vw' : isSMONly ? '50vw' : '55vw',
+                display: 'flex',
                 flex: 1,
-                flexDirection: "column",
-                overflow: "hidden",
-                borderRadius: "4px",
+                flexDirection: 'column',
+                overflow: 'hidden',
+                borderRadius: '4px',
                 backgroundColor: theme.palette.darkTheme.slightLighter,
               }}
             >
               <Box
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                <Box position={"absolute"} top={0} right={0}>
+                <Box position={'absolute'} top={0} right={0}>
                   <IconButton
                     onClick={() => {
                       handleClose();
@@ -246,9 +248,9 @@ export default function SettingDialogueBox({
                   </IconButton>
                 </Box>
                 <Typography
-                  variant="h5"
+                  variant='h5'
                   style={{
-                    fontWeight: "bold",
+                    fontWeight: 'bold',
                   }}
                 >
                   Settings
@@ -256,20 +258,20 @@ export default function SettingDialogueBox({
               </Box>
               <Box
                 style={{
-                  display: "flex",
+                  display: 'flex',
                   flex: 1,
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <Box mt={5}>
                   <Box>
                     {[
-                      { value: "audio", label: "Audio" },
-                      { value: "video", label: "Video" },
+                      { value: 'audio', label: 'Audio' },
+                      { value: 'video', label: 'Video' },
                     ].map(({ value, label }) =>
-                      label === "Audio" || label === "Video" ? (
+                      label === 'Audio' || label === 'Video' ? (
                         <Button
                           classes={{
                             root:
@@ -279,14 +281,14 @@ export default function SettingDialogueBox({
                           }}
                           style={{
                             borderRadius: 0,
-                            color: "white",
-                            borderColor: "white",
+                            color: 'white',
+                            borderColor: 'white',
                           }}
-                          variant={setting === value ? "contained" : "outlined"}
+                          variant={setting === value ? 'contained' : 'outlined'}
                           disableElevation
                           disableRipple
-                          color={setting === value ? "primary" : "white"}
-                          size={"large"}
+                          color={setting === value ? 'primary' : 'white'}
+                          size={'large'}
                           onClick={() => {
                             handleSetting(null, value);
                           }}
@@ -298,28 +300,28 @@ export default function SettingDialogueBox({
                   </Box>
                 </Box>
               </Box>
-              {setting === "audio" ? (
+              {setting === 'audio' ? (
                 <Box ref={boxRef}>
-                  <Box style={{ width: "100%" }}>
+                  <Box style={{ width: '100%' }}>
                     <Grid
                       spacing={3}
                       container
                       style={{
-                        display: "flex",
-                        flexDirection: isXSOnly ? "column-reverse" : "row",
+                        display: 'flex',
+                        flexDirection: isXSOnly ? 'column-reverse' : 'row',
                       }}
                     >
                       <Grid item xs={12} md={7}>
                         <Box>
                           <Box
-                            style={{ display: "flex", flexDirection: "column" }}
+                            style={{ display: 'flex', flexDirection: 'column' }}
                             mt={isXStoSM ? 0 : 3}
                           >
                             <Box ml={2}>
                               <Typography
-                                variant="subtitle1"
+                                variant='subtitle1'
                                 style={{
-                                  fontWeight: "bold",
+                                  fontWeight: 'bold',
                                 }}
                               >
                                 Microphone
@@ -327,11 +329,11 @@ export default function SettingDialogueBox({
                             </Box>
 
                             <FormControl
-                              style={{ width: "100%", marginTop: 8 }}
+                              style={{ width: '100%', marginTop: 8 }}
                             >
                               <Select
                                 fullWidth
-                                variant="outlined"
+                                variant='outlined'
                                 value={audioTrack?.getSettings()?.deviceId}
                                 MenuProps={{
                                   classes: {
@@ -342,14 +344,14 @@ export default function SettingDialogueBox({
                                   icon: classes.selectIcon,
                                 }}
                                 style={{
-                                  border: `1px solid ${"white"}`,
+                                  border: `1px solid ${'white'}`,
                                 }}
                                 onChange={(e) => {
                                   changeMic(e.target.value);
                                 }}
                               >
                                 {mics?.map((item, index) => {
-                                  return item?.kind === "audioinput" ? (
+                                  return item?.kind === 'audioinput' ? (
                                     <MenuItem
                                       value={item?.deviceId}
                                       onClick={(e) => {
@@ -372,34 +374,34 @@ export default function SettingDialogueBox({
                       </Grid>
                       <Grid item xs={12} md={5}>
                         <Box
-                          style={{ position: "relative" }}
+                          style={{ position: 'relative' }}
                           mt={isXStoSM ? 0 : 5}
                           p={2}
                         >
                           <Box
                             style={{
                               flex: 1,
-                              display: "flex",
-                              width: isXStoSM ? "50%" : "100%",
-                              height: isXStoSM ? "50%" : undefined,
-                              paddingTop: !isXSOnly ? "56.25%" : "auto",
-                              position: "relative",
+                              display: 'flex',
+                              width: isXStoSM ? '50%' : '100%',
+                              height: isXStoSM ? '50%' : undefined,
+                              paddingTop: !isXSOnly ? '56.25%' : 'auto',
+                              position: 'relative',
                               borderRadius: theme.spacing(1 / 4),
-                              overflow: "hidden",
+                              overflow: 'hidden',
                             }}
                           >
                             <Box
                               style={{
-                                position: !isXSOnly ? "absolute" : "unset",
+                                position: !isXSOnly ? 'absolute' : 'unset',
                                 top: 0,
                                 left: 0,
                                 right: 0,
                                 bottom: 0,
-                                display: "flex",
-                                alignItems: "flex-start",
-                                flexDirection: "column",
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                flexDirection: 'column',
                                 borderRadius: theme.spacing(1),
-                                overflow: "hidden",
+                                overflow: 'hidden',
                               }}
                             >
                               <AudioAnalyser audioTrack={audioTrack} />
@@ -410,39 +412,39 @@ export default function SettingDialogueBox({
                     </Grid>
                   </Box>
                 </Box>
-              ) : setting === "video" ? (
+              ) : setting === 'video' ? (
                 <Box ref={boxRef}>
-                  <Box style={{ width: "100%" }}>
+                  <Box style={{ width: '100%' }}>
                     <Grid
                       spacing={3}
                       container
                       style={{
-                        display: "flex",
-                        flexDirection: isXSOnly ? "column-reverse" : "row",
+                        display: 'flex',
+                        flexDirection: isXSOnly ? 'column-reverse' : 'row',
                       }}
                     >
                       <Grid item xs={12} md={7}>
                         <Box>
                           <Box
-                            style={{ display: "flex", flexDirection: "column" }}
+                            style={{ display: 'flex', flexDirection: 'column' }}
                             mt={isXStoSM ? 0 : 3}
                           >
                             <Box ml={2}>
                               <Typography
-                                variant="subtitle1"
+                                variant='subtitle1'
                                 style={{
-                                  fontWeight: "bold",
+                                  fontWeight: 'bold',
                                 }}
                               >
                                 Camera
                               </Typography>
                             </Box>
                             <FormControl
-                              style={{ width: "100%", marginTop: 8 }}
+                              style={{ width: '100%', marginTop: 8 }}
                             >
                               <Select
                                 fullWidth
-                                variant="outlined"
+                                variant='outlined'
                                 value={videoTrack?.getSettings()?.deviceId}
                                 onChange={(e) => {
                                   changeWebcam(e.target.value);
@@ -456,11 +458,11 @@ export default function SettingDialogueBox({
                                   icon: classes.selectIcon,
                                 }}
                                 style={{
-                                  border: `1px solid ${"white"}`,
+                                  border: `1px solid ${'white'}`,
                                 }}
                               >
                                 {webcams?.map((item, index) => {
-                                  return item?.kind === "videoinput" ? (
+                                  return item?.kind === 'videoinput' ? (
                                     <MenuItem
                                       value={item?.deviceId}
                                       onClick={() => {
@@ -470,7 +472,7 @@ export default function SettingDialogueBox({
                                         }));
                                       }}
                                     >
-                                      {item?.label === ""
+                                      {item?.label === ''
                                         ? `Webcam ${index + 1}`
                                         : item?.label}
                                     </MenuItem>
@@ -483,34 +485,34 @@ export default function SettingDialogueBox({
                       </Grid>
                       <Grid item xs={12} md={5}>
                         <Box
-                          style={{ position: "relative" }}
+                          style={{ position: 'relative' }}
                           mt={isXStoSM ? 0 : 5}
                           p={2}
                         >
                           <Box
                             style={{
                               flex: 1,
-                              display: "flex",
-                              width: isXStoSM ? "50%" : "100%",
-                              height: isXStoSM ? "50%" : undefined,
-                              paddingTop: !isXSOnly ? "56.25%" : "auto",
-                              position: "relative",
+                              display: 'flex',
+                              width: isXStoSM ? '50%' : '100%',
+                              height: isXStoSM ? '50%' : undefined,
+                              paddingTop: !isXSOnly ? '56.25%' : 'auto',
+                              position: 'relative',
                               borderRadius: theme.spacing(1 / 4),
-                              overflow: "hidden",
+                              overflow: 'hidden',
                             }}
                           >
                             <Box
                               style={{
-                                position: !isXSOnly ? "absolute" : "unset",
+                                position: !isXSOnly ? 'absolute' : 'unset',
                                 top: 0,
                                 left: 0,
                                 right: 0,
                                 bottom: 0,
                                 backgroundColor: theme.palette.primary.light,
-                                display: "flex",
-                                flexDirection: "column",
+                                display: 'flex',
+                                flexDirection: 'column',
                                 borderRadius: theme.spacing(1),
-                                overflow: "hidden",
+                                overflow: 'hidden',
                               }}
                             >
                               <video
@@ -519,7 +521,7 @@ export default function SettingDialogueBox({
                                 muted
                                 ref={popupVideoPlayerRef}
                                 controls={false}
-                                className={classes.video + " flip"}
+                                className={classes.video + ' flip'}
                               />
                             </Box>
                           </Box>
@@ -534,9 +536,9 @@ export default function SettingDialogueBox({
 
           <ConfirmBox
             open={dlgDevices}
-            title="Mic or webcam not available"
-            subTitle="Please connect a mic and webcam to speak and share your video in the meeting. You can also join without them."
-            successText="DISMISS"
+            title='Mic or webcam not available'
+            subTitle='Please connect a mic and webcam to speak and share your video in the meeting. You can also join without them.'
+            successText='DISMISS'
             onSuccess={() => {
               setDlgDevices(false);
             }}

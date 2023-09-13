@@ -1,7 +1,9 @@
-import useResponsiveSize from "../utils/useResponsiveSize";
-import Lottie from "react-lottie";
-import { Tooltip } from "@material-ui/core";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+// external imports
+import Lottie from 'react-lottie';
+import { Tooltip } from '@material-ui/core';
+// internal import
+import useResponsiveSize from '../utils/useResponsiveSize';
 
 export const OutlinedButton = ({
   bgColor,
@@ -62,27 +64,27 @@ export const OutlinedButton = ({
   }, []);
 
   return (
-    <Tooltip placement="top" title={tooltip} open={mouseOver || mouseDown}>
+    <Tooltip placement='top' title={tooltip} open={mouseOver || mouseDown}>
       <div
         className={`flex items-center justify-center  rounded-lg ${
-          bgColor ? `${bgColor}` : isFocused ? "bg-white" : "bg-gray-750"
+          bgColor ? `${bgColor}` : isFocused ? 'bg-white' : 'bg-gray-750'
         } ${
           mouseOver
-            ? "border-2 border-transparent border-solid"
+            ? 'border-2 border-transparent border-solid'
             : borderColor
             ? `border-2 border-[${borderColor}] border-solid`
             : bgColor
-            ? "border-2 border-transparent border-solid"
-            : "border-2 border-solid border-[#ffffff33]"
+            ? 'border-2 border-transparent border-solid'
+            : 'border-2 border-solid border-[#ffffff33]'
         } md:m-2 m-1`}
         style={{
-          transition: "all 200ms",
-          transitionTimingFunction: "ease-in-out",
+          transition: 'all 200ms',
+          transitionTimingFunction: 'ease-in-out',
           opacity: blinkingState,
         }}
       >
         <div
-          className="cursor-pointer"
+          className='cursor-pointer'
           id={btnID}
           onMouseEnter={() => {
             setMouseOver(true);
@@ -100,12 +102,12 @@ export const OutlinedButton = ({
           onClick={onClick}
         >
           <div
-            className="flex items-center justify-center p-1 m-1 rounded-lg"
+            className='flex items-center justify-center p-1 m-1 rounded-lg'
             style={{
               opacity: disabled ? disabledOpacity || 0.7 : 1,
               transform: `scale(${mouseOver ? (mouseDown ? 0.95 : 1.1) : 1})`,
               transition: `all ${200 * 1}ms`,
-              transitionTimingFunction: "linear",
+              transitionTimingFunction: 'linear',
             }}
           >
             {Icon &&
@@ -114,7 +116,7 @@ export const OutlinedButton = ({
                   <Lottie
                     style={{ height: iconSize }}
                     options={lottieOption}
-                    eventListeners={[{ eventName: "done" }]}
+                    eventListeners={[{ eventName: 'done' }]}
                     height={iconSize}
                     width={
                       (iconSize * lottieOption?.width) / lottieOption?.height
@@ -127,25 +129,25 @@ export const OutlinedButton = ({
                   <Icon
                     style={{
                       color: isFocused
-                        ? focusIconColor || "#1C1F2E"
+                        ? focusIconColor || '#1C1F2E'
                         : color
                         ? color
-                        : "#fff",
+                        : '#fff',
                       height: iconSize,
                       width: iconSize,
                     }}
                     fillColor={
                       isFocused
-                        ? focusIconColor || "#1C1F2E"
+                        ? focusIconColor || '#1C1F2E'
                         : color
                         ? color
-                        : "#fff"
+                        : '#fff'
                     }
                   />
                   {badge && (
                     <p
                       className={`${
-                        isFocused ? "text-black" : "text-white"
+                        isFocused ? 'text-black' : 'text-white'
                       } text-base ml-2`}
                     >
                       {badge}
@@ -155,7 +157,7 @@ export const OutlinedButton = ({
               ))}
           </div>
         </div>
-        {typeof renderRightComponent === "function" && renderRightComponent()}
+        {typeof renderRightComponent === 'function' && renderRightComponent()}
       </div>
     </Tooltip>
   );

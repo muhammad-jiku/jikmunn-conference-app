@@ -1,20 +1,5 @@
-import { Constants, useMeeting, usePubSub } from "@videosdk.live/react-sdk";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { sideBarModes } from "./MeetingContainer/MeetingContainer";
-import { ClipboardIcon, CheckIcon } from "@heroicons/react/outline";
-import recordingBlink from "../animations/recording-blink.json";
-import useIsRecording from "./MeetingContainer/useIsRecording";
-import RecordingIcon from "../icons/Bottombar/RecordingIcon";
-import MicOnIcon from "../icons/Bottombar/MicOnIcon";
-import MicOffIcon from "../icons/Bottombar/MicOffIcon";
-import WebcamOnIcon from "../icons/Bottombar/WebcamOnIcon";
-import WebcamOffIcon from "../icons/Bottombar/WebcamOffIcon";
-import ScreenShareIcon from "../icons/Bottombar/ScreenShareIcon";
-import ChatIcon from "../icons/Bottombar/ChatIcon";
-import ParticipantsIcon from "../icons/Bottombar/ParticipantsIcon";
-import EndIcon from "../icons/Bottombar/EndIcon";
-import RaiseHandIcon from "../icons/Bottombar/RaiseHandIcon";
-import { OutlinedButton } from "./OutlinedButton";
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+// external imports
 import {
   Box,
   Grid,
@@ -27,29 +12,46 @@ import {
   Tooltip,
   Typography,
   useTheme,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   ArrowDropDown as ArrowDropDownIcon,
   MoreHoriz as MoreHorizIcon,
-} from "@material-ui/icons";
-import useIsTab from "../utils/useIsTab";
-import useIsMobile from "../utils/useIsMobile";
-import { MobileIconButton } from "./MobileIconButton";
+} from '@material-ui/icons';
+import { Constants, useMeeting, usePubSub } from '@videosdk.live/react-sdk';
+// internal imports
+import { sideBarModes } from './MeetingContainer/MeetingContainer';
+import { ClipboardIcon, CheckIcon } from '@heroicons/react/outline';
+import recordingBlink from '../animations/recording-blink.json';
+import useIsRecording from './MeetingContainer/useIsRecording';
+import RecordingIcon from '../icons/Bottombar/RecordingIcon';
+import MicOnIcon from '../icons/Bottombar/MicOnIcon';
+import MicOffIcon from '../icons/Bottombar/MicOffIcon';
+import WebcamOnIcon from '../icons/Bottombar/WebcamOnIcon';
+import WebcamOffIcon from '../icons/Bottombar/WebcamOffIcon';
+import ScreenShareIcon from '../icons/Bottombar/ScreenShareIcon';
+import ChatIcon from '../icons/Bottombar/ChatIcon';
+import ParticipantsIcon from '../icons/Bottombar/ParticipantsIcon';
+import EndIcon from '../icons/Bottombar/EndIcon';
+import RaiseHandIcon from '../icons/Bottombar/RaiseHandIcon';
+import { OutlinedButton } from './OutlinedButton';
+import useIsTab from '../utils/useIsTab';
+import useIsMobile from '../utils/useIsMobile';
+import { MobileIconButton } from './MobileIconButton';
 
 const useStyles = makeStyles({
   popoverHoverDark: {
-    "&:hover": {
-      backgroundColor: "#2B303499",
+    '&:hover': {
+      backgroundColor: '#2B303499',
     },
   },
 
   menuItemDark: {
-    "&:hover": {
-      backgroundColor: "transparent",
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
   },
   menuItemGutters: {
-    padding: "6px 12px",
+    padding: '6px 12px',
   },
 });
 
@@ -64,23 +66,23 @@ export function BottomBar({
   setSelectMicDeviceId,
 }) {
   const RaiseHandBTN = ({ isMobile, isTab }) => {
-    const { publish } = usePubSub("RAISE_HAND");
+    const { publish } = usePubSub('RAISE_HAND');
     const RaiseHand = () => {
-      publish("Raise Hand");
+      publish('Raise Hand');
     };
 
     return isMobile || isTab ? (
       <MobileIconButton
-        id="RaiseHandBTN"
-        tooltipTitle={"Raise hand"}
+        id='RaiseHandBTN'
+        tooltipTitle={'Raise hand'}
         Icon={RaiseHandIcon}
         onClick={RaiseHand}
-        buttonText={"Raise Hand"}
+        buttonText={'Raise Hand'}
       />
     ) : (
       <OutlinedButton
         onClick={RaiseHand}
-        tooltip={"Raise Hand"}
+        tooltip={'Raise Hand'}
         Icon={RaiseHandIcon}
       />
     );
@@ -93,7 +95,7 @@ export function BottomBar({
       autoplay: true,
       animationData: recordingBlink,
       rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice",
+        preserveAspectRatio: 'xMidYMid slice',
       },
       height: 64,
       width: 160,
@@ -136,14 +138,14 @@ export function BottomBar({
         isFocused={isRecording}
         tooltip={
           recordingState === Constants.recordingEvents.RECORDING_STARTED
-            ? "Stop Recording"
+            ? 'Stop Recording'
             : recordingState === Constants.recordingEvents.RECORDING_STARTING
-            ? "Starting Recording"
+            ? 'Starting Recording'
             : recordingState === Constants.recordingEvents.RECORDING_STOPPED
-            ? "Start Recording"
+            ? 'Start Recording'
             : recordingState === Constants.recordingEvents.RECORDING_STOPPING
-            ? "Stopping Recording"
-            : "Start Recording"
+            ? 'Stopping Recording'
+            : 'Start Recording'
         }
         lottieOption={isRecording ? defaultOptions : null}
         isRequestProcessing={isRequestProcessing}
@@ -164,8 +166,8 @@ export function BottomBar({
       <Box>
         <Box
           style={{
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             padding: 12,
             paddingBottom: 0,
           }}
@@ -192,11 +194,11 @@ export function BottomBar({
             <Box
               key={`mic_${index}`}
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 paddingLeft: 12,
                 paddingRight: 12,
-                backgroundColor: deviceId === selectMicDeviceId && "#3F4046",
+                backgroundColor: deviceId === selectMicDeviceId && '#3F4046',
               }}
               classes={{
                 root: classes.popoverHoverDark,
@@ -207,9 +209,9 @@ export function BottomBar({
               <MenuItem
                 disableRipple
                 style={{
-                  display: "flex",
+                  display: 'flex',
                   flex: 1,
-                  backgroundColor: deviceId === selectMicDeviceId && "#3F4046",
+                  backgroundColor: deviceId === selectMicDeviceId && '#3F4046',
                 }}
                 key={`mics_${deviceId}`}
                 selected={deviceId === selectMicDeviceId}
@@ -247,12 +249,12 @@ export function BottomBar({
       <Popover
         container={tollTipEl.current}
         anchorOrigin={{
-          vertical: isMobile || isTab ? "bottom" : "top",
-          horizontal: "center",
+          vertical: isMobile || isTab ? 'bottom' : 'top',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: isMobile || isTab ? "top" : "bottom",
-          horizontal: "center",
+          vertical: isMobile || isTab ? 'top' : 'bottom',
+          horizontal: 'center',
         }}
         anchorEl={tollTipEl.current}
         open={Boolean(downArrow)}
@@ -265,7 +267,7 @@ export function BottomBar({
         >
           <SingleMicMenu
             micArr={mics}
-            label={"MICROPHONE"}
+            label={'MICROPHONE'}
             // Icon={MicrophoneIcon}
             changeMic={changeMic}
             classes={classes}
@@ -305,25 +307,25 @@ export function BottomBar({
           onClick={() => {
             mMeeting.toggleMic();
           }}
-          bgColor={localMicOn ? "bg-gray-750" : "bg-white"}
-          borderColor={localMicOn && "#ffffff33"}
+          bgColor={localMicOn ? 'bg-gray-750' : 'bg-white'}
+          borderColor={localMicOn && '#ffffff33'}
           isFocused={localMicOn}
-          focusIconColor={localMicOn && "white"}
-          tooltip={"Toggle Mic"}
+          focusIconColor={localMicOn && 'white'}
+          tooltip={'Toggle Mic'}
           renderRightComponent={() => {
             return (
-              <Tooltip placement="bottom" title={"Change microphone"}>
+              <Tooltip placement='bottom' title={'Change microphone'}>
                 <IconButton
                   onClick={(e) => {
                     getMics(mMeeting.getMics);
                     handleClick(e);
                   }}
-                  size={"small"}
+                  size={'small'}
                 >
                   <ArrowDropDownIcon
-                    fontSize={"small"}
+                    fontSize={'small'}
                     style={{
-                      color: mMeeting.localMicOn ? "white" : "black",
+                      color: mMeeting.localMicOn ? 'white' : 'black',
                     }}
                   />
                 </IconButton>
@@ -373,25 +375,25 @@ export function BottomBar({
           onClick={() => {
             mMeeting.toggleWebcam();
           }}
-          bgColor={localWebcamOn ? "bg-gray-750" : "bg-white"}
-          borderColor={localWebcamOn && "#ffffff33"}
+          bgColor={localWebcamOn ? 'bg-gray-750' : 'bg-white'}
+          borderColor={localWebcamOn && '#ffffff33'}
           isFocused={localWebcamOn}
-          focusIconColor={localWebcamOn && "white"}
-          tooltip={"Toggle Webcam"}
+          focusIconColor={localWebcamOn && 'white'}
+          tooltip={'Toggle Webcam'}
           renderRightComponent={() => {
             return (
-              <Tooltip placement="bottom" title={"Change webcam"}>
+              <Tooltip placement='bottom' title={'Change webcam'}>
                 <IconButton
                   onClick={(e) => {
                     getWebcams(mMeeting?.getWebcams);
                     handleClickWebCam(e);
                   }}
-                  size={"small"}
+                  size={'small'}
                 >
                   <ArrowDropDownIcon
-                    fontSize={"small"}
+                    fontSize={'small'}
                     style={{
-                      color: localWebcamOn ? "white" : "black",
+                      color: localWebcamOn ? 'white' : 'black',
                     }}
                   />
                 </IconButton>
@@ -402,12 +404,12 @@ export function BottomBar({
         <Popover
           container={tollTipEl.current}
           anchorOrigin={{
-            vertical: isMobile || isTab ? "bottom" : "top",
-            horizontal: "center",
+            vertical: isMobile || isTab ? 'bottom' : 'top',
+            horizontal: 'center',
           }}
           transformOrigin={{
-            vertical: isMobile || isTab ? "top" : "bottom",
-            horizontal: "center",
+            vertical: isMobile || isTab ? 'top' : 'bottom',
+            horizontal: 'center',
           }}
           anchorEl={tollTipEl.current}
           open={Boolean(webcamDownArrow)}
@@ -449,20 +451,20 @@ export function BottomBar({
 
     return isMobile || isTab ? (
       <MobileIconButton
-        id="screen-share-btn"
+        id='screen-share-btn'
         tooltipTitle={
           presenterId
             ? localScreenShareOn
-              ? "Stop Presenting"
+              ? 'Stop Presenting'
               : null
-            : "Present Screen"
+            : 'Present Screen'
         }
         buttonText={
           presenterId
             ? localScreenShareOn
-              ? "Stop Presenting"
+              ? 'Stop Presenting'
               : null
-            : "Present Screen"
+            : 'Present Screen'
         }
         isFocused={localScreenShareOn}
         Icon={ScreenShareIcon}
@@ -489,9 +491,9 @@ export function BottomBar({
         tooltip={
           presenterId
             ? localScreenShareOn
-              ? "Stop Presenting"
+              ? 'Stop Presenting'
               : null
-            : "Present Screen"
+            : 'Present Screen'
         }
         disabled={presenterId ? (localScreenShareOn ? false : true) : false}
       />
@@ -504,12 +506,12 @@ export function BottomBar({
     return (
       <OutlinedButton
         Icon={EndIcon}
-        bgColor="bg-red-150"
+        bgColor='bg-red-150'
         onClick={() => {
           mMeeting.leave();
           setIsMeetingLeft(true);
         }}
-        tooltip="Leave Meeting"
+        tooltip='Leave Meeting'
       />
     );
   };
@@ -517,8 +519,8 @@ export function BottomBar({
   const ChatBTN = ({ isMobile, isTab }) => {
     return isMobile || isTab ? (
       <MobileIconButton
-        tooltipTitle={"Chat"}
-        buttonText={"Chat"}
+        tooltipTitle={'Chat'}
+        buttonText={'Chat'}
         Icon={ChatIcon}
         isFocused={sideBarMode === sideBarModes.CHAT}
         onClick={() => {
@@ -535,8 +537,8 @@ export function BottomBar({
             s === sideBarModes.CHAT ? null : sideBarModes.CHAT
           );
         }}
-        isFocused={sideBarMode === "CHAT"}
-        tooltip="View Chat"
+        isFocused={sideBarMode === 'CHAT'}
+        tooltip='View Chat'
       />
     );
   };
@@ -545,9 +547,9 @@ export function BottomBar({
     const { participants } = useMeeting();
     return isMobile || isTab ? (
       <MobileIconButton
-        tooltipTitle={"Participants"}
+        tooltipTitle={'Participants'}
         isFocused={sideBarMode === sideBarModes.PARTICIPANTS}
-        buttonText={"Participants"}
+        buttonText={'Participants'}
         disabledOpacity={1}
         Icon={ParticipantsIcon}
         onClick={() => {
@@ -566,7 +568,7 @@ export function BottomBar({
           );
         }}
         isFocused={sideBarMode === sideBarModes.PARTICIPANTS}
-        tooltip={"View Participants"}
+        tooltip={'View Participants'}
         badge={`${new Map(participants)?.size}`}
       />
     );
@@ -576,11 +578,11 @@ export function BottomBar({
     const mMeeting = useMeeting();
     const [isCopied, setIsCopied] = useState(false);
     return (
-      <div className="flex items-center justify-center lg:ml-0 ml-4 mt-4 xl:mt-0">
-        <div className="flex border-2 border-gray-850 p-2 rounded-md items-center justify-center">
-          <h1 className="text-white text-base ">{mMeeting.meetingId}</h1>
+      <div className='flex items-center justify-center lg:ml-0 ml-4 mt-4 xl:mt-0'>
+        <div className='flex border-2 border-gray-850 p-2 rounded-md items-center justify-center'>
+          <h1 className='text-white text-base '>{mMeeting.meetingId}</h1>
           <button
-            className="ml-2"
+            className='ml-2'
             onClick={() => {
               navigator.clipboard.writeText(mMeeting.meetingId);
               setIsCopied(true);
@@ -590,9 +592,9 @@ export function BottomBar({
             }}
           >
             {isCopied ? (
-              <CheckIcon className="h-5 w-5 text-green-400" />
+              <CheckIcon className='h-5 w-5 text-green-400' />
             ) : (
-              <ClipboardIcon className="h-5 w-5 text-white" />
+              <ClipboardIcon className='h-5 w-5 text-white' />
             )}
           </button>
         </div>
@@ -621,15 +623,15 @@ export function BottomBar({
 
   const BottomBarButtonTypes = useMemo(
     () => ({
-      END_CALL: "END_CALL",
-      CHAT: "CHAT",
-      PARTICIPANTS: "PARTICIPANTS",
-      SCREEN_SHARE: "SCREEN_SHARE",
-      WEBCAM: "WEBCAM",
-      MIC: "MIC",
-      RAISE_HAND: "RAISE_HAND",
-      RECORDING: "RECORDING",
-      MEETING_ID_COPY: "MEETING_ID_COPY",
+      END_CALL: 'END_CALL',
+      CHAT: 'CHAT',
+      PARTICIPANTS: 'PARTICIPANTS',
+      SCREEN_SHARE: 'SCREEN_SHARE',
+      WEBCAM: 'WEBCAM',
+      MIC: 'MIC',
+      RAISE_HAND: 'RAISE_HAND',
+      RECORDING: 'RECORDING',
+      MEETING_ID_COPY: 'MEETING_ID_COPY',
     }),
     []
   );
@@ -644,7 +646,7 @@ export function BottomBar({
 
   return isMobile || isTab ? (
     <div
-      className="flex items-center justify-center"
+      className='flex items-center justify-center'
       style={{ height: bottomBarHeight }}
     >
       <LeaveBTN />
@@ -653,18 +655,18 @@ export function BottomBar({
       <RecordingBTN />
       <OutlinedButton Icon={MoreHorizIcon} onClick={handleClickFAB} />
       <SwipeableDrawer
-        anchor={"bottom"}
+        anchor={'bottom'}
         open={Boolean(open)}
         onClose={handleCloseFAB}
         onOpen={handleClickFAB}
-        style={{ paddingBottom: "100px" }}
+        style={{ paddingBottom: '100px' }}
       >
-        <Grid container className="bg-gray-800 py-6">
+        <Grid container className='bg-gray-800 py-6'>
           {otherFeatures.map(({ icon }, index) => {
             return (
               <Grid
                 key={`icon_${index}`}
-                className="flex items-center justify-center"
+                className='flex items-center justify-center'
                 item
                 xs={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 7 : 4}
                 sm={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 5 : 3}
@@ -688,10 +690,10 @@ export function BottomBar({
       </SwipeableDrawer>
     </div>
   ) : (
-    <div className="md:flex lg:px-2 xl:px-6 pb-2 px-2 hidden">
+    <div className='md:flex lg:px-2 xl:px-6 pb-2 px-2 hidden'>
       <MeetingIdCopyBTN />
 
-      <div className="flex flex-1 items-center justify-center" ref={tollTipEl}>
+      <div className='flex flex-1 items-center justify-center' ref={tollTipEl}>
         <RecordingBTN />
         <RaiseHandBTN isMobile={isMobile} isTab={isTab} />
         <MicBTN />
@@ -699,7 +701,7 @@ export function BottomBar({
         <ScreenShareBTN isMobile={isMobile} isTab={isTab} />
         <LeaveBTN />
       </div>
-      <div className="flex items-center justify-center">
+      <div className='flex items-center justify-center'>
         <ChatBTN isMobile={isMobile} isTab={isTab} />
         <ParticipantsBTN isMobile={isMobile} isTab={isTab} />
       </div>

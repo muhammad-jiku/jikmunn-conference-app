@@ -1,6 +1,8 @@
-import { CheckIcon, ClipboardIcon } from "@heroicons/react/outline";
-import React, { useState } from "react";
-import useResponsiveSize from "../utils/useResponsiveSize";
+import React, { useState } from 'react';
+// external import
+import { CheckIcon, ClipboardIcon } from '@heroicons/react/outline';
+// internal import
+import useResponsiveSize from '../utils/useResponsiveSize';
 
 export function MeetingDetailsScreen({
   onClickJoin,
@@ -11,7 +13,7 @@ export function MeetingDetailsScreen({
   setVideoTrack,
   onClickStartMeeting,
 }) {
-  const [meetingId, setMeetingId] = useState("");
+  const [meetingId, setMeetingId] = useState('');
   const [meetingIdError, setMeetingIdError] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
@@ -33,10 +35,10 @@ export function MeetingDetailsScreen({
       }}
     >
       {iscreateMeetingClicked ? (
-        <div className="border border-solid border-gray-400 rounded-xl px-4 py-3  flex items-center justify-center">
-          <p className="text-white text-base">Meeting code: {meetingId}</p>
+        <div className='border border-solid border-gray-400 rounded-xl px-4 py-3  flex items-center justify-center'>
+          <p className='text-white text-base'>Meeting code: {meetingId}</p>
           <button
-            className="ml-2"
+            className='ml-2'
             onClick={() => {
               navigator.clipboard.writeText(meetingId);
               setIsCopied(true);
@@ -46,9 +48,9 @@ export function MeetingDetailsScreen({
             }}
           >
             {isCopied ? (
-              <CheckIcon className="h-5 w-5 text-green-400" />
+              <CheckIcon className='h-5 w-5 text-green-400' />
             ) : (
-              <ClipboardIcon className="h-5 w-5 text-white" />
+              <ClipboardIcon className='h-5 w-5 text-white' />
             )}
           </button>
         </div>
@@ -59,11 +61,11 @@ export function MeetingDetailsScreen({
             onChange={(e) => {
               setMeetingId(e.target.value);
             }}
-            placeholder="Enter meeting Id"
-            className="px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center"
+            placeholder='Enter meeting Id'
+            className='px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center'
           />
           {meetingIdError && (
-            <p className="text-xs text-red-600">Please enter valid meetingId</p>
+            <p className='text-xs text-red-600'>Please enter valid meetingId</p>
           )}
         </>
       ) : null}
@@ -73,8 +75,8 @@ export function MeetingDetailsScreen({
           <input
             value={participantName}
             onChange={(e) => setParticipantName(e.target.value)}
-            placeholder="Enter your name"
-            className="px-4 py-3 mt-5 bg-gray-650 rounded-xl text-white w-full text-center"
+            placeholder='Enter your name'
+            className='px-4 py-3 mt-5 bg-gray-650 rounded-xl text-white w-full text-center'
           />
 
           {/* <p className="text-xs text-white mt-1 text-center">
@@ -83,7 +85,7 @@ export function MeetingDetailsScreen({
           <button
             disabled={participantName.length < 3}
             className={`w-full ${
-              participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
+              participantName.length < 3 ? 'bg-gray-650' : 'bg-purple-350'
             }  text-white px-2 py-3 rounded-xl mt-5`}
             onClick={(e) => {
               if (iscreateMeetingClicked) {
@@ -93,21 +95,21 @@ export function MeetingDetailsScreen({
                 }
                 onClickStartMeeting();
               } else {
-                if (meetingId.match("\\w{4}\\-\\w{4}\\-\\w{4}")) {
+                if (meetingId.match('\\w{4}\\-\\w{4}\\-\\w{4}')) {
                   onClickJoin(meetingId);
                 } else setMeetingIdError(true);
               }
             }}
           >
-            {iscreateMeetingClicked ? "Start a meeting" : "Join a meeting"}
+            {iscreateMeetingClicked ? 'Start a meeting' : 'Join a meeting'}
           </button>
         </>
       )}
 
       {!iscreateMeetingClicked && !isJoinMeetingClicked && (
-        <div className="w-full md:mt-0 mt-4 flex items-center justify-center flex-col">
+        <div className='w-full md:mt-0 mt-4 flex items-center justify-center flex-col'>
           <button
-            className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl"
+            className='w-full bg-purple-350 text-white px-2 py-3 rounded-xl'
             onClick={async (e) => {
               const meetingId = await onClickCreateMeeting();
               setMeetingId(meetingId);
@@ -117,7 +119,7 @@ export function MeetingDetailsScreen({
             Create a meeting
           </button>
           <button
-            className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5"
+            className='w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5'
             onClick={(e) => {
               setIsJoinMeetingClicked(true);
             }}

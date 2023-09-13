@@ -1,18 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
-import { BottomBar } from "../BottomBar";
-import { SidebarConatiner } from "../SidebarContainer/SidebarContainer";
-import { ParticipantsViewer } from "./ParticipantView";
-import { PresenterView } from "./PresenterView";
-import { useSnackbar } from "notistack";
-import { nameTructed, trimSnackBarText } from "../../utils/helper";
-import useResponsiveSize from "../../utils/useResponsiveSize";
-import WaitingToJoin from "../WaitingToJoin";
-import useWindowSize from "../../utils/useWindowSize";
+import React, { useState, useEffect, useRef } from 'react';
+// external imports
+import { useSnackbar } from 'notistack';
+import { useMeeting, usePubSub } from '@videosdk.live/react-sdk';
+// internal imports
+import { BottomBar } from '../BottomBar';
+import WaitingToJoin from '../WaitingToJoin';
+import { PresenterView } from './PresenterView';
+import { ParticipantsViewer } from './ParticipantView';
+import { SidebarConatiner } from '../SidebarContainer/SidebarContainer';
+import useWindowSize from '../../utils/useWindowSize';
+import useResponsiveSize from '../../utils/useResponsiveSize';
+import { nameTructed, trimSnackBarText } from '../../utils/helper';
 
 export const sideBarModes = {
-  PARTICIPANTS: "PARTICIPANTS",
-  CHAT: "CHAT",
+  PARTICIPANTS: 'PARTICIPANTS',
+  CHAT: 'CHAT',
 };
 
 export function MeetingContainer({
@@ -51,7 +53,7 @@ export function MeetingContainer({
     containerRef.current?.offsetWidth &&
       setContainerWidth(containerRef.current.offsetWidth);
 
-    window.addEventListener("resize", ({ target }) => {
+    window.addEventListener('resize', ({ target }) => {
       containerRef.current?.offsetHeight &&
         setContainerHeight(containerRef.current.offsetHeight);
       containerRef.current?.offsetWidth &&
@@ -86,7 +88,7 @@ export function MeetingContainer({
   function onEntryResponded(participantId, name) {
     // console.log(" onEntryResponded", participantId, name);
     if (mMeetingRef.current?.localParticipant?.id === participantId) {
-      if (name === "allowed") {
+      if (name === 'allowed') {
         setLocalParticipantAllowedJoin(true);
       } else {
         setLocalParticipantAllowedJoin(false);
@@ -189,7 +191,7 @@ export function MeetingContainer({
   const bottomBarHeight = 60;
   const [sideBarMode, setSideBarMode] = useState(null);
 
-  usePubSub("RAISE_HAND", {
+  usePubSub('RAISE_HAND', {
     onMessageReceived: (data) => {
       const localParticipantId = mMeeting?.localParticipant?.id;
 
@@ -202,14 +204,14 @@ export function MeetingContainer({
       ).play();
 
       enqueueSnackbar(
-        `${isLocal ? "You" : nameTructed(senderName, 15)} raised hand 🖐🏼`
+        `${isLocal ? 'You' : nameTructed(senderName, 15)} raised hand 🖐🏼`
       );
 
       participantRaisedHand(senderId);
     },
   });
 
-  usePubSub("CHAT", {
+  usePubSub('CHAT', {
     onMessageReceived: (data) => {
       const localParticipantId = mMeeting?.localParticipant?.id;
 
@@ -230,16 +232,16 @@ export function MeetingContainer({
   });
   const { width: windowWidth, height: windowHeight } = useWindowSize();
   const isMobile = window.matchMedia(
-    "only screen and (max-width: 768px)"
+    'only screen and (max-width: 768px)'
   ).matches;
 
   return (
     <div
       style={{ height: windowHeight }}
       ref={containerRef}
-      className="h-screen flex flex-col bg-gray-800"
+      className='h-screen flex flex-col bg-gray-800'
     >
-      {typeof localParticipantAllowedJoin === "boolean" ? (
+      {typeof localParticipantAllowedJoin === 'boolean' ? (
         localParticipantAllowedJoin ? (
           <>
             <div className={` flex flex-1 flex-row bg-gray-800 `}>

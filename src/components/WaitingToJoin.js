@@ -1,15 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import useResponsiveSize from "../utils/useResponsiveSize";
-import animationData from "../../src/animations/join_meeting.json";
-import Lottie from "react-lottie";
-import { useTheme } from "@material-ui/core";
+import React, { useEffect, useRef, useState } from 'react';
+// external imports
+import Lottie from 'react-lottie';
+import { useTheme } from '@material-ui/core';
+// internal imports
+import useResponsiveSize from '../utils/useResponsiveSize';
+import animationData from '../../src/animations/join_meeting.json';
 
 const WaitingToJoin = () => {
   const theme = useTheme();
 
   const waitingMessages = [
-    { index: 0, text: "Creating a room for you..." },
-    { index: 1, text: "Almost there..." },
+    { index: 0, text: 'Creating a room for you...' },
+    { index: 1, text: 'Almost there...' },
   ];
   const [message, setMessage] = useState(waitingMessages[0]);
 
@@ -42,28 +44,28 @@ const WaitingToJoin = () => {
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
 
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
         backgroundColor: theme.palette.darkTheme.main,
       }}
     >
-      <div className="flex flex-col">
+      <div className='flex flex-col'>
         <Lottie
           options={animationDefaultOptions}
-          eventListeners={[{ eventName: "done" }]}
+          eventListeners={[{ eventName: 'done' }]}
           height={lottieSize}
           width={lottieSize}
         />
-        <h1 className="text-white text-center font-bold mt-1 text-xl">
+        <h1 className='text-white text-center font-bold mt-1 text-xl'>
           {message.text}
         </h1>
       </div>

@@ -1,3 +1,5 @@
+import React from 'react';
+// external import
 import {
   Box,
   Dialog,
@@ -6,8 +8,7 @@ import {
   DialogActions,
   Button,
   useTheme,
-} from "@material-ui/core";
-import React from "react";
+} from '@material-ui/core';
 
 const ConfirmBox = ({
   successText,
@@ -24,56 +25,56 @@ const ConfirmBox = ({
   return (
     <Dialog
       fullWidth
-      maxWidth="xs"
+      maxWidth='xs'
       open={open}
       onClose={() => {}}
-      aria-labelledby="responsive-dialog-title"
+      aria-labelledby='responsive-dialog-title'
     >
       <Box
         style={{
           padding: 8,
-          backgroundColor: "#050A0E",
+          backgroundColor: '#050A0E',
           // backgroundColor: theme.palette.darkTheme.main,
         }}
       >
         <Box
           style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
           }}
         >
           <Box
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
             }}
           >
             <DialogTitle
               style={{
                 padding: 8,
                 margin: 0,
-                color: "#fff",
+                color: '#fff',
               }}
-              id="responsive-dialog-title"
+              id='responsive-dialog-title'
             >
               <Typography
-                variant="subtitle1"
+                variant='subtitle1'
                 style={{
-                  fontWeight: "bold",
-                  color: "#fff",
+                  fontWeight: 'bold',
+                  color: '#fff',
                 }}
               >
                 {title}
                 {/* {`Allow participant entry?`} */}
               </Typography>
               <Typography
-                variant="subtitle1"
+                variant='subtitle1'
                 style={{
                   marginTop: 3,
-                  color: subTitleColor ? subTitleColor : "#9FA0A7",
+                  color: subTitleColor ? subTitleColor : '#9FA0A7',
                 }}
               >
                 {subTitle}
@@ -86,24 +87,24 @@ const ConfirmBox = ({
           <DialogActions>
             <Button
               onClick={onReject}
-              color={"white"}
+              color={'white'}
               style={{
-                color: "white",
+                color: 'white',
               }}
-              size="medium"
+              size='medium'
             >
               {rejectText}
             </Button>
 
             <Button
-              size="medium"
+              size='medium'
               onClick={onSuccess}
-              color="white"
+              color='white'
               autoFocus
-              variant="outlined"
+              variant='outlined'
               style={{
-                color: "white",
-                borderColor: "white",
+                color: 'white',
+                borderColor: 'white',
               }}
             >
               {successText}

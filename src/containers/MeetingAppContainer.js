@@ -1,16 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import { JoiningScreen } from "../components/JoiningScreen";
-import { MeetingContainer } from "../components/MeetingContainer/MeetingContainer";
-import { SnackbarProvider } from "notistack";
-import { LeaveScreen } from "../components/LeaveScreen";
-import { ThemeProvider, useMediaQuery, useTheme } from "@material-ui/core";
-import { MeetingProvider } from "@videosdk.live/react-sdk";
-import generateMuiTheme from "../mui/theme";
+import React, { useEffect, useRef, useState } from 'react';
+// external imports
+import { ThemeProvider, useMediaQuery, useTheme } from '@material-ui/core';
+import { SnackbarProvider } from 'notistack';
+import { MeetingProvider } from '@videosdk.live/react-sdk';
+// internal imports
+import generateMuiTheme from '../mui/theme';
+import { JoiningScreen } from '../components/JoiningScreen';
+import { LeaveScreen } from '../components/LeaveScreen';
+import { MeetingContainer } from '../components/MeetingContainer/MeetingContainer';
 
 function MeetingAppContainer() {
-  const [token, setToken] = useState("");
-  const [meetingId, setMeetingId] = useState("");
-  const [participantName, setParticipantName] = useState("");
+  const [token, setToken] = useState('');
+  const [meetingId, setMeetingId] = useState('');
+  const [participantName, setParticipantName] = useState('');
   const [micOn, setMicOn] = useState(true);
   const [webcamOn, setWebcamOn] = useState(true);
   const [selectedMic, setSelectedMic] = useState({ id: null });
@@ -74,12 +76,12 @@ function MeetingAppContainer() {
   };
 
   const theme = useTheme();
-  const isXStoSM = useMediaQuery(theme.breakpoints.only("xs"));
+  const isXStoSM = useMediaQuery(theme.breakpoints.only('xs'));
 
   useEffect(() => {
     if (isXStoSM) {
       window.onbeforeunload = () => {
-        return "Are you sure you want to exit?";
+        return 'Are you sure you want to exit?';
       };
     }
   }, [isXStoSM]);
@@ -89,8 +91,8 @@ function MeetingAppContainer() {
       {isMeetingStarted ? (
         <SnackbarProvider
           anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
+            vertical: 'bottom',
+            horizontal: 'left',
           }}
           autoHideDuration={5000}
           maxSnack={3}
@@ -100,7 +102,7 @@ function MeetingAppContainer() {
               meetingId,
               micEnabled: micOn,
               webcamEnabled: webcamOn,
-              name: participantName ? participantName : "TestUser",
+              name: participantName ? participantName : 'TestUser',
             }}
             token={token}
             reinitialiseMeetingOnConfigChange={true}
@@ -108,8 +110,8 @@ function MeetingAppContainer() {
           >
             <MeetingContainer
               onMeetingLeave={() => {
-                setToken("");
-                setMeetingId("");
+                setToken('');
+                setMeetingId('');
                 setWebcamOn(false);
                 setMicOn(false);
                 setMeetingStarted(false);

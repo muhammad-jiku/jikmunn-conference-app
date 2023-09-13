@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+// external imports
 import {
   Badge,
   Box,
@@ -5,9 +7,8 @@ import {
   Tooltip,
   Typography,
   useTheme,
-} from "@material-ui/core";
-import React, { useState } from "react";
-import Lottie from "react-lottie";
+} from '@material-ui/core';
+import Lottie from 'react-lottie';
 
 export const MobileIconButton = ({
   badge,
@@ -31,22 +32,22 @@ export const MobileIconButton = ({
   const iconSize = 24 * (large ? 1.7 : 1);
 
   return (
-    <Tooltip placement="bottom" title={tooltipTitle || ""}>
+    <Tooltip placement='bottom' title={tooltipTitle || ''}>
       <Box
         p={0}
         style={{
           borderRadius: theme.spacing(1),
           // overflow: "hidden",
           transition: `all ${200 * 0.5}ms`,
-          transitionTimingFunction: "linear",
+          transitionTimingFunction: 'linear',
         }}
       >
         <ButtonBase
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
           id={btnID}
           onMouseEnter={() => {
@@ -69,31 +70,31 @@ export const MobileIconButton = ({
             style={{
               opacity: disabled ? disabledOpacity || 0.7 : 1,
               // overflow: "hidden",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               borderRadius: theme.spacing(1),
               transform: `scale(${mouseOver ? (mouseDown ? 0.95 : 1.1) : 1})`,
               transition: `all ${200 * 0.5}ms`,
-              transitionTimingFunction: "linear",
+              transitionTimingFunction: 'linear',
             }}
           >
-            <Badge max={1000} color={"secondary"} badgeContent={badge}>
+            <Badge max={1000} color={'secondary'} badgeContent={badge}>
               {lottieOption ? (
                 <Box
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     backgroundColor: bgColor,
-                    padding: "5px",
-                    borderRadius: "5px",
+                    padding: '5px',
+                    borderRadius: '5px',
                   }}
                 >
                   <Lottie
                     style={{ height: iconSize }}
                     options={lottieOption}
-                    eventListeners={[{ eventName: "done" }]}
+                    eventListeners={[{ eventName: 'done' }]}
                     height={iconSize}
                     width={
                       (iconSize * lottieOption?.width) / lottieOption?.height
@@ -104,11 +105,11 @@ export const MobileIconButton = ({
               ) : (
                 <Icon
                   style={{
-                    color: isFocused ? focusIconColor || "#fff" : "#95959E",
+                    color: isFocused ? focusIconColor || '#fff' : '#95959E',
                     height: iconSize,
                     width: iconSize,
                   }}
-                  fillColor={isFocused ? focusIconColor || "#fff" : "#95959E"}
+                  fillColor={isFocused ? focusIconColor || '#fff' : '#95959E'}
                 />
               )}
             </Badge>
@@ -116,10 +117,10 @@ export const MobileIconButton = ({
           <Box>
             {buttonText ? (
               <Typography
-                variant="subtitle2"
+                variant='subtitle2'
                 style={{
-                  fontWeight: "bold",
-                  color: isFocused ? "#fff" : "#95959E",
+                  fontWeight: 'bold',
+                  color: isFocused ? '#fff' : '#95959E',
                 }}
               >
                 {buttonText}

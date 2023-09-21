@@ -61,7 +61,7 @@ export function MeetingDetailsScreen({
             onChange={(e) => {
               setMeetingId(e.target.value);
             }}
-            placeholder='Enter meeting Id'
+            placeholder='Enter meeting ID'
             className='px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center'
           />
           {meetingIdError && (

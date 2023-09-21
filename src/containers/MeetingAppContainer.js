@@ -8,6 +8,7 @@ import generateMuiTheme from '../mui/theme';
 import { JoiningScreen } from '../components/JoiningScreen';
 import { LeaveScreen } from '../components/LeaveScreen';
 import { MeetingContainer } from '../components/MeetingContainer/MeetingContainer';
+import { handleDisableRightClick } from '../utils/handleRightClick';
 
 function MeetingAppContainer() {
   const [token, setToken] = useState('');
@@ -85,6 +86,14 @@ function MeetingAppContainer() {
       };
     }
   }, [isXStoSM]);
+
+  useEffect(() => {
+    // disable right click
+    document.addEventListener('contextmenu', handleDisableRightClick);
+
+    // enable right click
+    // document.removeEventListener('contextmenu', handleDisableRightClick);
+  }, []);
 
   return (
     <>
